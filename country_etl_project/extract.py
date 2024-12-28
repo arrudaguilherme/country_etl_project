@@ -78,29 +78,47 @@ def get_tld(item:dict):
         return "Information not found"
     return tlds[0]
 
+data_list = []
+
 for item in data:
-    print(item["name"]["official"]) #name
-    print(item["cca3"]) #code
-    print(item.get("independent","Status not found")) # independent
-    print(get_currency(item))
-    print(get_capital(item))
-    print(item["region"])
-    print(get_subregion(item))
-    print(get_languages(item))
-    print(get_latitude(item))
-    print(get_longitude(item))
-    print(item["landlocked"])
-    print(get_borders(item))
-    print(item["area"])
-    print(item["maps"]["googleMaps"]) #google maps
-    print(item["population"])
-    print(get_car_signs(item))
-    print(item["car"]["side"])
-    print(', '.join(item["timezones"]))
-    print(' '.join(item["continents"]))
-    print(item["flags"][1])
-    print(get_tld(item))
-    print("########################")
+    country_name = item["name"]["official"]
+    country_code = item["cca3"] 
+    country_independence_status = item.get("independent","Status not found")
+    country_currency = get_currency(item)
+    country_capital = get_capital(item)
+    country_region = item["region"]
+    country_subregion = get_subregion(item)
+    country_languages = get_languages(item)
+    country_latitude = get_latitude(item)
+    country_longitude = get_longitude(item)
+    country_landlock_status = item["landlocked"]
+    country_borders = get_borders(item)
+    country_area = item["area"]
+    country_location = item["maps"]["googleMaps"] 
+    country_population = item["population"]
+    country_car_sign = get_car_signs(item)
+    country_car_side = item["car"]["side"]
+    country_timezones = ', '.join(item["timezones"])
+    country_continents = ' '.join(item["continents"])
+    country_flag = item["flags"][1]
+    country_ltd = get_tld(item)
+
+    data_list.append([country_name,country_code,country_independence_status,country_currency,
+                      country_capital,country_region,country_subregion,country_languages,
+                      country_latitude,country_longitude,country_landlock_status,country_borders,
+                      country_area,country_location,country_population,country_car_sign,country_car_side,
+                      country_timezones,country_continents,country_flag,country_ltd])
+    
+    
+df = pd.DataFrame(data_list,columns=[country_name,country_code,country_independence_status,country_currency,
+                      country_capital,country_region,country_subregion,country_languages,
+                      country_latitude,country_longitude,country_landlock_status,country_borders,
+                      country_area,country_location,country_population,country_car_sign,country_car_side,
+                      country_timezones,country_continents,country_flag,country_ltd])
+
+df.to_csv('teste.csvs')
+    
+
 
 
 
